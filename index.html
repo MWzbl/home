@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MW个人导航页 | 探索网络世界</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 头部样式 */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2.5rem 1.5rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 132, 255, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .header:hover {
+            transform: translateY(-5px);
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #f0f4f8;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 12px rgba(0, 132, 255, 0.15);
+        }
+
+        .name {
+            font-size: 2.2rem;
+            color: #0084FF;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .bio {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto 1.8rem;
+        }
+
+        /* 联系方式按钮组 */
+        .contact-buttons {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.2rem;
+            flex-wrap: nowrap;
+            padding: 0 0.8rem;
+            margin: 0 auto;
+            max-width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .contact-buttons::-webkit-scrollbar {
+            display: none;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.6rem 1.2rem;
+            background: #f0f4f8;
+            border: none;
+            border-radius: 24px;
+            color: #0084FF;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 8px rgba(0, 132, 255, 0.1);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .contact-btn:hover {
+            background: #0084FF;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 12px rgba(0, 132, 255, 0.2);
+        }
+
+        /* 自定义图标样式（统一管理） */
+        .icon {
+            vertical-align: middle;
+            object-fit: contain;
+        }
+
+        /* 联系按钮专用图标（16px×16px） */
+        .contact-icon {
+            width: 1rem;  /* 约16px */
+            height: 1rem;
+            margin-right: 0.6rem;
+        }
+
+        /* 导航按钮专用图标（24px×24px） */
+        .nav-icon {
+            width: 1.5rem;  /* 约24px */
+            height: 1.5rem;
+            margin-right: 1rem;
+        }
+
+        /* 导航分类 */
+        .nav-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #0084FF;
+            margin-bottom: 1.5rem;
+            padding-left: 0.8rem;
+            border-left: 4px solid #0084FF;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            padding: 1.2rem 1.5rem;
+            background: white;
+            border: none;
+            border-radius: 12px;
+            color: #333;
+            font-size: 1.1rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 12px rgba(0, 132, 255, 0.05);
+        }
+
+        .nav-btn:hover {
+            background: #0084FF;
+            color: white;
+            transform: translateX(8px);
+            box-shadow: 0 4px 20px rgba(0, 132, 255, 0.2);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header {
+                padding: 2rem 1rem;
+            }
+            
+            .name {
+                font-size: 1.8rem;
+            }
+            
+            .bio {
+                font-size: 1rem;
+            }
+
+            .contact-buttons {
+                gap: 0.8rem;
+                padding: 0 0.5rem;
+            }
+
+            .contact-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .contact-icon {
+                width: 0.9rem;
+                height: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                padding: 1.5rem 0.8rem;
+            }
+
+            .contact-btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.85rem;
+                min-width: 60px;
+            }
+
+            .contact-icon {
+                width: 0.8rem;
+                height: 0.8rem;
+                margin-right: 0.4rem;
+            }
+
+            .nav-icon {
+                width: 1.2rem;  /* 小屏幕适当缩小 */
+                height: 1.2rem;
+                margin-right: 0.8rem;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <img src="http://q.qlogo.cn/headimg_dl?dst_uin=2357885308&spec=640&img_type=jpg" alt="我的头像" class="avatar">
+            <h1 class="name">MW</h1>
+            <p class="bio">前端开发者 | 物联网工程师 | 安卓逆向爱好者<br>这里收集了我常用的优质网站，陪你一起高效成长</p>
+            
+            <!-- 联系方式按钮组（已替换图标直链） -->
+            <div class="contact-buttons">
+                <!-- 邮箱按钮 -->
+                <a href="mailto:oymwzbl@163.com" class="contact-btn">
+                    <img src="https://s21.ax1x.com/2025/08/31/pVcBTw4.png" class="icon contact-icon" alt="邮箱"> 邮箱
+                </a>
+                
+                <!-- QQ按钮 -->
+                <a href="https://qm.qq.com/q/LbdtQJ90Qw" class="contact-btn">
+                    <img src="https://s21.ax1x.com/2025/08/31/pVcB7TJ.png" class="icon contact-icon" alt="QQ"> QQ
+                </a>
+                
+                <!-- 微信按钮 -->
+                <a href="https://s21.ax1x.com/2025/08/31/pVcDitA.png" target="_blank" class="contact-btn">
+                    <img src="https://s21.ax1x.com/2025/08/31/pVcDApt.png" class="icon contact-icon" alt="微信"> 微信
+                </a>
+            </div>
+        </header>
+
+        <!-- 影视&阅读＆音乐导航 -->
+        <section class="nav-section">
+            <h2 class="section-title">影视&阅读＆音乐</h2>
+            <div class="nav-grid">
+                <!-- 导航1 -->
+                <a href="https://www.zhihu.com/" target="_blank" class="nav-btn">
+                    <img src="https://s21.ax1x.com/2025/03/16/pEa7Mp4.md.png" class="icon nav-icon" alt="闪电影视"> 闪电影视
+                </a>
+                <!-- 导航2 -->
+                <a href="https://github.com/" target="_blank" class="nav-btn">
+                    <img src="https://s21.ax1x.com/2025/08/31/pVcBywQ.png" class="icon nav-icon" alt="阅读APP"> 阅读APP
+                </a>
+                <!-- 导航3 -->
+                <a href="yuedu://booksource/importonline?src=https://lz.qaiu.top/parser?url=https://www.123pan.com/s/QAklVv-81Ubh" target="_blank" class="nav-btn">
+                    <img src="https://s21.ax1x.com/2025/08/31/pVcBywQ.png" class="icon nav-icon" alt="阅读书源"> 阅读书源
+                </a>
+                <!-- 导航4 -->
+                <a href="https://mail.qq.com/" target="_blank" class="nav-btn">
+                    <img src="https://cdn-icons-png.flaticon.com/512/125/125508.png" class="icon nav-icon" alt="音乐外链搜索"> 音乐外链搜索
+                </a>
+            </div>
+        </section>
+
+        <!-- 其他导航 -->
+        <section class="nav-section">
+            <h2 class="section-title">其他</h2>
+            <div class="nav-grid">
+                <!-- 导航1 -->
+                <a href="https://www.coursera.org/" target="_blank" class="nav-btn">
+                    <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://s3.amazonaws.com/coursera_assets/logos/coursera-logo-2017-120x60.png" class="icon nav-icon" alt="Coursera"> Coursera
+                </a>
+                <!-- 导航2 -->
+                <a href="https://leetcode.cn/" target="_blank" class="nav-btn">
+                    <img src="https://leetcode.cn/static/images/logo.1b4d7c6e.svg" class="icon nav-icon" alt="LeetCode"> LeetCode
+                </a>
+                <!-- 导航3 -->
+                <a href="https://developer.mozilla.org/zh-CN/" target="_blank" class="nav-btn">
+                    <img src="https://developer.mozilla.org/favicon-48x48.cbbd161b.png" class="icon nav-icon" alt="MDN文档"> MDN文档
+                </a>
+                <!-- 导航4 -->
+                <a href="https://www.runoob.com/" target="_blank" class="nav-btn">
+                    <img src="https://www.runoob.com/favicon.ico" class="icon nav-icon" alt="菜鸟教程"> 菜鸟教程
+                </a>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>© 2025 MW的个人导航主页 | 最后更新：2025-08-31</p>
+        </footer>
+    </div>
+</body>
+</html>
